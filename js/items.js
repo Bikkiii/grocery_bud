@@ -1,4 +1,4 @@
-import { createSingleItem } from "./single_item.js";
+import { createSingleItem } from "./single-item.js";
 
 //create items container
 

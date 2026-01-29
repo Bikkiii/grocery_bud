@@ -9,7 +9,7 @@ function render() {
   const app = document.getElementById("app");
   app.innerHTML = "";
 
-  const itemsElement = createItems(items);
+  const itemsElement = createItems(items, editCompleted);
   app.appendChild(itemsElement);
 }
 export function editCompleted(itemId) {
@@ -22,4 +22,10 @@ export function editCompleted(itemId) {
   render();
 }
 
-// render();
+export function removeItem(itemId) {
+  items = items.filter((item) => item.id !== itemId);
+  render();
+  setTimeout(() => alert("Item Deleted Successfully!"), 0);
+}
+
+render();
