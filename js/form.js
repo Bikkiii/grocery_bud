@@ -1,7 +1,7 @@
-import { addItem } from "./app.js";
+import { addItem, updateItemName } from "./app.js";
 
 //create form element
-export function createForm() {
+export function createForm(editId, itemToEdit) {
   const form = document.createElement("form");
 
   form.innerHTML = `
@@ -28,7 +28,13 @@ export function createForm() {
       return;
     }
 
-    addItem(value);
+    //added conditions
+    if (editId) {
+      updateItemName(value);
+    } else {
+      addItem(value);
+    }
+
     input.value = "";
   });
 

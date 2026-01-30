@@ -1,4 +1,4 @@
-import { editCompleted, removeItem } from "./app.js";
+import { editCompleted, removeItem, setEditId } from "./app.js";
 
 export function createSingleItem(item) {
   const div = document.createElement("div");
@@ -23,6 +23,10 @@ export function createSingleItem(item) {
   //add event listener for remove button
   const removeBtn = div.querySelector(".remove-btn");
   removeBtn.addEventListener("click", () => removeItem(item.id));
+
+  //add event listener for edit button
+  const editBtn = div.querySelector(".edit-btn");
+  editBtn.addEventListener("click", () => setEditId(item.id));
 
   return div;
 }
