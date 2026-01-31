@@ -1,9 +1,25 @@
-import { groceryItems } from "./data.js";
+// import { groceryItems } from "./data.js";
 import { createItems } from "./items.js";
 import { createForm } from "./form.js";
 
-let items = groceryItems;
+// local storage functions
+function getLocalStorage() {
+  const list = localStorage.getItem("grocery-list");
+  if (list) {
+    return JSON.parse(list);
+  }
+  return [];
+}
+
+function setLocalStorage(itemsArray) {
+  localStorage.setItem("grocery-list", JSON.stringify(itemsArray));
+}
+
+//initialize items from local storage
+
+let items = getLocalStorage();
 let editId = null;
+
 //render app
 
 function render() {
@@ -37,6 +53,8 @@ export function addItem(itemName) {
   items = [...items, newItem];
   render();
   setTimeout(() => alert("Item Added Succesfully!"), 0);
+  setLocalStorage(items);
+  render();
 }
 
 export function editCompleted(itemId) {
@@ -46,6 +64,7 @@ export function editCompleted(itemId) {
     }
     return item;
   });
+  setLocalStorage(items);
   render();
 }
 
@@ -53,6 +72,8 @@ export function removeItem(itemId) {
   items = items.filter((item) => item.id !== itemId);
   render();
   setTimeout(() => alert("Item Deleted Successfully!"), 0);
+  setLocalStorage(items);
+  render();
 }
 
 export function updateItemName(newName) {
@@ -65,6 +86,8 @@ export function updateItemName(newName) {
   editId = null;
   render();
   setTimeout(() => alert("Item Updated Successfully"), 0);
+  setLocalStorage(items);
+  render();
 }
 
 //set edit id function
@@ -81,4 +104,4 @@ export function setEditId(itemId) {
   }, 0);
 }
 
-// render();
+render();
